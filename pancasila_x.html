@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Room Escape Identitas</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+  body {
+    font-family: 'Roboto', sans-serif;
+    background: #0a192f;
+    color: #8892b0;
+    padding: 30px;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+  }
+  .box {
+    background: #112240;
+    max-width: 600px;
+    margin: auto;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px -15px rgba(2,12,27,0.7);
+  }
+  h2, h3 {
+    color: #ccd6f6;
+  }
+  input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0 20px;
+    box-sizing: border-box;
+    background-color: #233554;
+    border: 1px solid #233554;
+    border-radius: 4px;
+    color: #ccd6f6;
+    outline: none;
+    transition: 0.3s;
+  }
+  input:focus {
+    border-color: #64ffda;
+  }
+  button {
+    position: relative;
+    display: inline-block;
+    padding: 10px 20px;
+    color: #64ffda;
+    font-size: 16px;
+    text-decoration: none;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition: 0.5s;
+    letter-spacing: 2px;
+    background: transparent;
+    border: 1px solid #64ffda;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+  }
+  button:hover {
+    background: rgba(100, 255, 218, 0.1);
+    color: #64ffda;
+    box-shadow: 0 0 5px rgba(100, 255, 218, 0.4), 0 0 25px rgba(100, 255, 218, 0.4), 0 0 50px rgba(100, 255, 218, 0.4);
+  }
+  .hidden {
+    display: none;
+  }
+  #login {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  #msg {
+    font-weight: bold;
+  }
+  #popupOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(10, 25, 47, 0.85);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  .popup-box {
+    background: #112240;
+    color: #ccd6f6;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 0 30px rgba(100, 255, 218, 0.15);
+    border: 1px solid #233554;
+    max-width: 400px;
+    width: 90%;
+  }
+</style>
+</head>
+<body>
+
+<div class="box">
+
+  <!-- LOGIN -->
+  <div id="login">
+    <h2>🔐 Masuk Room Escape</h2>
+    <input type="password" id="password" placeholder="Masukkan password">
+    <button onclick="login()">
+      Masuk
+    </button>
+    <p id="loginMsg"></p>
+  </div>
+
+  <!-- SOAL -->
+  <div id="soal" class="hidden">
+    <h2>🧠 Room Escape: Identitas Diri</h2>
+    <p>Isi 7 kode dengan benar untuk membuka pintu!</p>
+
+    1. Rina belum memiliki rencana masa depan dan tidak tertarik mencari tahu minat atau bakatnya. Status identitas apa yang dialami Rina?
+    <input id="a1">
+
+    2. Andi memilih jurusan sekolah karena mengikuti keinginan orang tuanya tanpa mempertimbangkan minat pribadi. Status identitas Andi termasuk apa?
+    <input id="a2">
+
+    3. Salsa sedang mencoba berbagai kegiatan ekstrakurikuler untuk menemukan minatnya, tetapi belum membuat keputusan. Status identitas yang dialami Salsa adalah?
+    <input id="a3">
+
+    4. Bima sudah mencari informasi tentang cita-cita dan mantap memilih tujuan hidupnya. Status identitas Bima disebut?
+    <input id="a4">
+
+    5. Seorang siswa dikenali sebagai peserta didik karena ia bersekolah dan belajar di suatu sekolah. Identitas tersebut terbentuk secara apa?
+    <input id="a5">
+
+    6. Bayu memiliki warna kulit dan bentuk rambut tertentu sejak lahir. Identitas Bayu tersebut termasuk identitas yang terbentuk secara apa?
+    <input id="a6">
+
+    7. Sekelompok siswa pecinta sepak bola memiliki simbol, atribut, dan kebiasaan yang sama. Identitas yang mereka miliki disebut?
+    <input id="a7">
+
+    <button onclick="cekJawaban()">
+      Buka Pintu
+    </button>
+    <p id="hasil"></p>
+  </div>
+
+</div>
+
+<div id="popupOverlay">
+  <div class="popup-box">
+    <h3>🎉 SELAMAT! Kamu berhasil keluar dari Room Escape!</h3>
+    <button onclick="kembaliKeLogin()">
+      Kembali ke menu login
+    </button>
+  </div>
+</div>
+
+<script>
+function login() {
+  const pw = document.getElementById("password").value;
+  if (pw === "ISTIQLAL10") { // password baru
+    document.getElementById("login").style.display = "none";
+    document.getElementById("soal").style.display = "block";
+  } else {
+    document.getElementById("loginMsg").innerHTML = "❌ Password salah!";
+  }
+}
+
+function cekJawaban() {
+  const benar = [
+    "IDENTITY DIFFUSION",
+    "IDENTITY FORECLOSURE",
+    "IDENTITY MORATORIUM",
+    "IDENTITY ACHIEVEMENT",
+    "SOSIAL",
+    "ALAMI",
+    "IDENTITAS KELOMPOK"
+  ];
+
+  const input = [
+    document.getElementById("a1").value.toUpperCase(),
+    document.getElementById("a2").value.toUpperCase(),
+    document.getElementById("a3").value.toUpperCase(),
+    document.getElementById("a4").value.toUpperCase(),
+    document.getElementById("a5").value.toUpperCase(),
+    document.getElementById("a6").value.toUpperCase(),
+    document.getElementById("a7").value.toUpperCase()
+  ];
+
+  let ok = true;
+  for (let i = 0; i < benar.length; i++) {
+    if (input[i] !== benar[i]) {
+      ok = false;
+      break;
+    }
+  }
+
+  const hasil = document.getElementById("hasil");
+  if (ok) {
+    hasil.innerHTML = "";
+    document.getElementById("popupOverlay").style.display = "flex";
+  } else {
+    hasil.style.color = "red";
+    hasil.innerHTML = "❌ Masih ada jawaban yang salah.";
+  }
+}
+
+function kembaliKeLogin() {
+  document.getElementById("popupOverlay").style.display = "none";
+  document.getElementById("soal").style.display = "none";
+  document.getElementById("login").style.display = "block";
+  document.getElementById("password").value = "";
+  document.getElementById("loginMsg").innerHTML = "";
+  for (let i = 1; i <= 7; i++) {
+    document.getElementById("a" + i).value = "";
+  }
+}
+</script>
+
+</body>
+</html>
